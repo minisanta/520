@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konami Code Easter Egg</title>
+    <title>Optometrist “拆弹”</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             color: white;
             display: flex;
             flex-direction: column;
@@ -63,12 +63,27 @@
             visibility: visible;
         }
         
-        .confetti {
+        .eye-chart {
+            font-family: 'Courier New', monospace;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .eye-chart .line1 { font-size: 60px; margin-bottom: 10px; }
+        .eye-chart .line2 { font-size: 48px; margin-bottom: 10px; }
+        .eye-chart .line3 { font-size: 36px; margin-bottom: 10px; }
+        .eye-chart .line4 { font-size: 24px; margin-bottom: 10px; }
+        .eye-chart .line5 { font-size: 18px; margin-bottom: 10px; }
+        .eye-chart .line6 { font-size: 14px; margin-bottom: 10px; }
+        .eye-chart .line7 { font-size: 10px; }
+        
+        .lens {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            opacity: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 0, 0, 0.3);
+            display: none;
         }
         
         .message {
@@ -78,7 +93,7 @@
         }
         
         button {
-            background-color: #4CAF50;
+            background-color: #5D93E1;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -90,63 +105,201 @@
             cursor: pointer;
             border-radius: 4px;
         }
+        
+        .glasses {
+            width: 100px;
+            height: 40px;
+            position: relative;
+            margin: 20px auto;
+        }
+        
+        .lens-left, .lens-right {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid #5D93E1;
+            position: absolute;
+            top: 0;
+        }
+        
+        .lens-left {
+            left: 0;
+        }
+        
+        .lens-right {
+            right: 0;
+        }
+        
+        .bridge {
+            width: 20px;
+            height: 3px;
+            background: #5D93E1;
+            position: absolute;
+            top: 20px;
+            left: 40px;
+        }
+        
+        .temple-left, .temple-right {
+            width: 40px;
+            height: 3px;
+            background: #5D93E1;
+            position: absolute;
+            top: 20px;
+        }
+        
+        .temple-left {
+            left: -38px;
+            transform: rotate(-10deg);
+        }
+        
+        .temple-right {
+            right: -38px;
+            transform: rotate(10deg);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ff4d6d;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background-color: #ff4d6d;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -15px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(45deg); }
+            50% { transform: scale(1.3) rotate(45deg); }
+            100% { transform: scale(1) rotate(45deg); }
+        }
+        
+        .pulse {
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        .love-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="instructions">
-            <h1>Konami Code Easter Egg Demo</h1>
-            <p>Press the Konami Code sequence to trigger a surprise!</p>
-            <p>The sequence is: <span class="key">↑</span> <span class="key">↑</span> <span class="key">↓</span> <span class="key">↓</span> <span class="key">←</span> <span class="key">→</span> <span class="key">←</span> <span class="key">→</span> <span class="key">B</span> <span class="key">A</span></p>
-        </div>
-        
-        <div>
-            <h2>How to Implement This Easter Egg</h2>
-            <p>Add the code below to any webpage to create this Easter egg. Just copy the script and CSS sections into your HTML file.</p>
+            <h1>Optometrist “拆弹” 游戏</h1>
+            <p>Type "P R O V I E W E Y E C A R E" to trigger the special optometrist surprise!</p>
+            <p>The sequence is: 
+                <span class="key">P</span> 
+                <span class="key">R</span> 
+                <span class="key">O</span> 
+                <span class="key">V</span> 
+                <span class="key">I</span> 
+                <span class="key">E</span> 
+                <span class="key">W</span> 
+                <span class="key">E</span> 
+                <span class="key">Y</span> 
+                <span class="key">E</span> 
+                <span class="key">C</span> 
+                <span class="key">A</span> 
+                <span class="key">R</span> 
+                <span class="key">E</span>
+            </p>
         </div>
     </div>
     
     <div id="secret" class="secret">
-        <h1 class="message">You found the secret! 🎉</h1>
-        <div class="message">Team Awesome!</div>
+        <h1 class="message">Vision Check! 👁️</h1>
+        
+        <div class="eye-chart">
+            <div class="line1">I ♥ U</div>
+            <div class="line2">520 快乐！</div>
+            <div class="line3">KEEP LOOKING</div>
+            <div class="line4">YOU'RE AMAZING</div>
+            <div class="line5">WORLD'S BEST OPTOMETRIST</div>
+            <div class="line6">YOUR EYES ARE THE WINDOWS TO MY SOUL</div>
+            <div class="line7">IF YOU CAN READ THIS THAT'S MEAN I LOVE YOU 4EVER</div>
+        </div>
+        
+        <div class="glasses floating">
+            <div class="lens-left"></div>
+            <div class="bridge"></div>
+            <div class="lens-right"></div>
+            <div class="temple-left"></div>
+            <div class="temple-right"></div>
+        </div>
+        
         <button id="closeButton">Close</button>
+        
+        <div class="love-container" id="loveContainer"></div>
     </div>
+    
+    <div id="lens" class="lens"></div>
 
     <script>
-        // Konami Code sequence
-        const konamiCode = [
-            'ArrowUp', 'ArrowUp', 
-            'ArrowDown', 'ArrowDown', 
-            'ArrowLeft', 'ArrowRight', 
-            'ArrowLeft', 'ArrowRight', 
-            'b', 'a'
+        // Eye code sequence
+        const eyeCode = [
+            'p', 'r', 'o', 'v', 'i', 'e', 'w', 'e', 'y', 'e', 'c', 'a', 'r', 'e'
         ];
         
-        let konamiCodePosition = 0;
+        let eyeCodePosition = 0;
         
         // Listen for keydown events
         document.addEventListener('keydown', function(e) {
             // Get the key pressed, make lowercase for consistency
             const key = e.key.toLowerCase();
             
-            // Get the expected key from the konami code
-            const expectedKey = konamiCode[konamiCodePosition].toLowerCase();
+            // Get the expected key from the eye code
+            const expectedKey = eyeCode[eyeCodePosition].toLowerCase();
             
             // Check if the key pressed is the expected key
             if (key === expectedKey) {
                 // Move to the next key in the sequence
-                konamiCodePosition++;
+                eyeCodePosition++;
                 
                 // If the entire sequence is entered correctly
-                if (konamiCodePosition === konamiCode.length) {
+                if (eyeCodePosition === eyeCode.length) {
                     // Activate the secret
                     activateSecret();
                     // Reset the position
-                    konamiCodePosition = 0;
+                    eyeCodePosition = 0;
                 }
             } else {
                 // Reset position if the wrong key is pressed
-                konamiCodePosition = 0;
+                eyeCodePosition = 0;
             }
         });
         
@@ -154,45 +307,80 @@
         function activateSecret() {
             const secretElement = document.getElementById('secret');
             secretElement.classList.add('active');
-            createConfetti();
+            createMagnifyingEffect();
+            createLoveAnimation();
         }
         
         // Close button functionality
         document.getElementById('closeButton').addEventListener('click', function() {
             document.getElementById('secret').classList.remove('active');
+            document.getElementById('lens').style.display = 'none';
+            document.getElementById('loveContainer').innerHTML = '';
         });
         
-        // Function to create confetti effect
-        function createConfetti() {
-            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
-            const confettiCount = 100;
+        // Function to create magnifying glass effect
+        function createMagnifyingEffect() {
+            const lens = document.getElementById('lens');
+            lens.style.display = 'block';
+            lens.style.width = '150px';
+            lens.style.height = '150px';
+            lens.style.background = 'rgba(255, 255, 255, 0.1)';
+            lens.style.backdropFilter = 'blur(2px)';
             
-            for (let i = 0; i < confettiCount; i++) {
+            // Move lens with mouse
+            document.addEventListener('mousemove', function(e) {
+                lens.style.left = (e.clientX - 75) + 'px';
+                lens.style.top = (e.clientY - 75) + 'px';
+            });
+        }
+        
+        // Function to create floating hearts animation
+        function createLoveAnimation() {
+            const loveContainer = document.getElementById('loveContainer');
+            const heartCount = 30;
+            
+            for (let i = 0; i < heartCount; i++) {
                 setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.classList.add('confetti');
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.top = -20 + 'px';
-                    confetti.style.width = Math.random() * 10 + 5 + 'px';
-                    confetti.style.height = Math.random() * 10 + 5 + 'px';
-                    confetti.style.opacity = 1;
-                    confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
                     
-                    document.body.appendChild(confetti);
+                    // Random starting position at the bottom
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.bottom = '0';
                     
-                    // Animate the confetti falling
-                    const animation = confetti.animate([
-                        { transform: 'translate3d(0, 0, 0) rotate(0)', opacity: 1 },
-                        { transform: 'translate3d(' + (Math.random() * 400 - 200) + 'px, ' + (Math.random() * 600 + 600) + 'px, 0) rotate(' + Math.random() * 520 + 'deg)', opacity: 0 }
+                    // Random size
+                    const size = Math.random() * 20 + 15;
+                    heart.style.width = size + 'px';
+                    heart.style.height = size + 'px';
+                    
+                    // Apply same size to before/after elements
+                    heart.style.setProperty('--heart-size', size + 'px');
+                    
+                    // Random opacity
+                    heart.style.opacity = Math.random() * 0.5 + 0.5;
+                    
+                    // Add pulse animation to some hearts
+                    if (Math.random() > 0.7) {
+                        heart.classList.add('pulse');
+                    }
+                    
+                    loveContainer.appendChild(heart);
+                    
+                    // Animate the heart floating up
+                    const animation = heart.animate([
+                        { transform: 'translate3d(0, 0, 0) rotate(45deg)', opacity: heart.style.opacity },
+                        { transform: 'translate3d(' + (Math.random() * 100 - 50) + 'px, -' + (Math.random() * 1000 + 500) + 'px, 0) rotate(' + (45 + Math.random() * 30) + 'deg)', opacity: 0 }
                     ], {
-                        duration: Math.random() * 3000 + 2000,
-                        easing: 'cubic-bezier(' + Math.random() + ',' + Math.random() + ',' + Math.random() + ',' + Math.random() + ')'
+                        duration: Math.random() * 6000 + 6000,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
                     });
                     
-                    animation.onfinish = () => confetti.remove();
-                }, Math.random() * 500);
+                    animation.onfinish = () => heart.remove();
+                }, Math.random() * 3000);
             }
+            
+            // Create new hearts periodically
+            setTimeout(createLoveAnimation, 6000);
         }
     </script>
 </body>
